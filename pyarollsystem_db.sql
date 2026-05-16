@@ -16,6 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `address`
+--
+
+DROP TABLE IF EXISTS `address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `address` (
+  `address_id` int NOT NULL AUTO_INCREMENT,
+  `house_no` varchar(20) DEFAULT NULL,
+  `street` varchar(100) DEFAULT NULL,
+  `barangay` varchar(100) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `province` varchar(100) DEFAULT NULL,
+  `postal_code` varchar(10) DEFAULT NULL,
+  `country` varchar(50) NOT NULL DEFAULT 'Philippines',
+  PRIMARY KEY (`address_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `address`
+--
+
+LOCK TABLES `address` WRITE;
+/*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES (1,NULL,'Valero Carpark Building Valero Street 1227, Makati City',NULL,NULL,NULL,NULL,'Philippines'),(2,NULL,'San Antonio De Padua 2, Block 1 Lot 8 and 2, Dasmarinas, Cavite',NULL,NULL,NULL,NULL,'Philippines'),(3,NULL,'Rm. 402 4/F Jiao Building Timog Avenue Cor. Quezon Avenue 1100, Quezon City',NULL,NULL,NULL,NULL,'Philippines'),(4,NULL,'460 Solanda Street Intramuros 1000, Manila',NULL,NULL,NULL,NULL,'Philippines'),(5,NULL,'National Highway, Gingoog, Misamis Occidental',NULL,NULL,NULL,NULL,'Philippines'),(6,NULL,'17/85 Stracke Via Suite 042, Poblacion, Las Pinas 4783 Dinagat Islands',NULL,NULL,NULL,NULL,'Philippines'),(7,NULL,'99 Strosin Hills, Poblacion, Bislig 5340 Tawi-Tawi',NULL,NULL,NULL,NULL,'Philippines'),(8,NULL,'12A/33 Upton Isle Apt. 420, Roxas City 1814 Surigao del Norte',NULL,NULL,NULL,NULL,'Philippines'),(9,NULL,'90A Dibbert Terrace Apt. 190, San Lorenzo 6056 Davao del Norte',NULL,NULL,NULL,NULL,'Philippines'),(10,NULL,'#284 T. Morato corner, Scout Rallos Street, Quezon City',NULL,NULL,NULL,NULL,'Philippines'),(11,NULL,'93/54 Shanahan Alley Apt. 183, Santo Tomas 1572 Masbate',NULL,NULL,NULL,NULL,'Philippines'),(12,NULL,'49 Springs Apt. 266, Poblacion, Taguig 3200 Occidental Mindoro',NULL,NULL,NULL,NULL,'Philippines'),(13,NULL,'42/25 Sawayn Stream, Ubay 1208 Zamboanga del Norte',NULL,NULL,NULL,NULL,'Philippines'),(14,NULL,'37/46 Kulas Roads, Maragondon 0962 Quirino',NULL,NULL,NULL,NULL,'Philippines'),(15,NULL,'22A/52 Lubowitz Meadows, Pililla 4895 Zambales',NULL,NULL,NULL,NULL,'Philippines'),(16,NULL,'90 O\'Keefe Spur Apt. 379, Catigbian 2772 Sulu',NULL,NULL,NULL,NULL,'Philippines'),(17,NULL,'89A Armstrong Trace, Compostela 7874 Maguindanao',NULL,NULL,NULL,NULL,'Philippines'),(18,NULL,'08 Grant Drive Suite 406, Poblacion, Iloilo City 9186 La Union',NULL,NULL,NULL,NULL,'Philippines'),(19,NULL,'93A/21 Berge Points, Tapaz 2180 Quezon',NULL,NULL,NULL,NULL,'Philippines'),(20,NULL,'65 Murphy Center Suite 094, Poblacion, Palayan 5636 Quirino',NULL,NULL,NULL,NULL,'Philippines'),(21,NULL,'47A/94 Larkin Plaza Apt. 179, Poblacion, Caloocan 2751 Quirino',NULL,NULL,NULL,NULL,'Philippines'),(22,NULL,'06A Gulgowski Extensions, Bongabon 6085 Zamboanga del Sur',NULL,NULL,NULL,NULL,'Philippines'),(23,NULL,'99A Padberg Spring, Poblacion, Mabalacat 3959 Lanao del Sur',NULL,NULL,NULL,NULL,'Philippines'),(24,NULL,'80A/48 Ledner Ridges, Poblacion, Kabankalan 8870 Marinduque',NULL,NULL,NULL,NULL,'Philippines'),(25,NULL,'96/48 Watsica Flats Suite 734, Poblacion, Malolos 1844 Ifugao',NULL,NULL,NULL,NULL,'Philippines'),(26,NULL,'58A Wilderman Walks, Poblacion, Digos 5822 Davao del Sur',NULL,NULL,NULL,NULL,'Philippines'),(27,NULL,'60 Goyette Valley Suite 219, Poblacion, Tabuk 3159 Lanao del Sur',NULL,NULL,NULL,NULL,'Philippines'),(28,NULL,'66/77 Mann Views, Luisiana 1263 Dinagat Islands',NULL,NULL,NULL,NULL,'Philippines'),(29,NULL,'72/70 Stamm Spurs, Bustos 4550 Iloilo',NULL,NULL,NULL,NULL,'Philippines'),(30,NULL,'50A/83 Bahringer Oval Suite 145, Kiamba 7688 Nueva Ecija',NULL,NULL,NULL,NULL,'Philippines'),(31,NULL,'95 Cremin Junction, Surallah 2809 Cotabato',NULL,NULL,NULL,NULL,'Philippines'),(32,NULL,'Hi-way, Yati, Liloan Cebu',NULL,NULL,NULL,NULL,'Philippines'),(33,NULL,'Bulala, Camalaniugan',NULL,NULL,NULL,NULL,'Philippines'),(34,NULL,'Agapita Building, Metro Manila',NULL,NULL,NULL,NULL,'Philippines');
+/*!40000 ALTER TABLE `address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `employee_info`
 --
 
@@ -92,8 +122,38 @@ CREATE TABLE `employee_profile` (
 
 LOCK TABLES `employee_profile` WRITE;
 /*!40000 ALTER TABLE `employee_profile` DISABLE KEYS */;
-INSERT INTO `employee_profile` VALUES (10001,'Garcia','Manuel III',NULL,'1983-10-11','789-654-122',NULL,'manuel_garcia@motorph.com',NULL,NULL,1,NULL,1),(10002,'Lim, Antonio','Antonio',NULL,'1988-06-19','171-867-411',NULL,'antonio_lim@motorph.com',NULL,NULL,1,NULL,1),(10003,'Aquino','Bianca Sofia',NULL,'1989-08-04','966-889-370',NULL,'bianca_aquino@motorph.com',NULL,NULL,1,NULL,1),(10004,'Reyes','Isabella',NULL,'1994-06-16','786-868-477',NULL,'isabella_reyes@motorph.com',NULL,NULL,1,NULL,1),(10005,'Hernandez, Eduard','Eduard',NULL,'1989-09-23','088-861-012',NULL,'eduard_hernandez@motorph.com',NULL,NULL,1,NULL,1),(10006,'Villanueva','Andrea Mae',NULL,'1988-02-14','918-621-603',NULL,'andrea_villanueva@motorph.com',NULL,NULL,1,NULL,1),(10007,'San Jose','Brad',NULL,'1996-03-15','797-009-261',NULL,'brad_san@motorph.com',NULL,NULL,1,NULL,1),(10008,'Romualdez','Alice',NULL,'1992-05-14','983-606-799',NULL,'alice_romualdez@motorph.com',NULL,NULL,1,NULL,1),(10009,'Atienza','Rosie',NULL,'1948-09-24','266-036-427',NULL,'rosie_atienza@motorph.com',NULL,NULL,1,NULL,1),(10010,'Alvaro','Roderick',NULL,'1988-03-30','053-381-386',NULL,'roderick_alvaro@motorph.com',NULL,NULL,1,NULL,1),(10011,'Salcedo','Anthony',NULL,'1993-09-14','070-766-300',NULL,'anthony_salcedo@motorph.com',NULL,NULL,1,NULL,1),(10012,'Lopez','Josie',NULL,'1987-01-14','478-355-427',NULL,'josie_lopez@motorph.com',NULL,NULL,1,NULL,1),(10013,'Farala','Martha',NULL,'1942-01-11','329-034-366',NULL,'martha_farala@motorph.com',NULL,NULL,1,NULL,1),(10014,'Martinez','Leila',NULL,'1970-07-11','877-110-749',NULL,'leila_martinez@motorph.com',NULL,NULL,1,NULL,1),(10015,'Romualdez','Fredrick',NULL,'1985-03-10','023-079-009',NULL,'fredrick_romualdez@motorph.com',NULL,NULL,1,NULL,1),(10016,'Mata','Christian',NULL,'1987-10-21','783-776-744',NULL,'christian_mata@motorph.com',NULL,NULL,1,NULL,1),(10017,'De Leon','Selena',NULL,'1975-02-20','975-432-139',NULL,'selena_de@motorph.com',NULL,NULL,1,NULL,1),(10018,'San Jose','Allison',NULL,'1986-06-24','179-075-129',NULL,'allison_san@motorph.com',NULL,NULL,1,NULL,1),(10019,'Rosario','Cydney',NULL,'1996-10-06','868-819-912',NULL,'cydney_rosario@motorph.com',NULL,NULL,1,NULL,1),(10020,'Bautista','Mark',NULL,'1991-02-12','683-725-348',NULL,'mark_bautista@motorph.com',NULL,NULL,1,NULL,1),(10021,'Lazaro','Darlene',NULL,'1985-11-25','740-721-558',NULL,'darlene_lazaro@motorph.com',NULL,NULL,2,NULL,1),(10022,'Delos Santos','Kolby',NULL,'1980-02-26','739-443-033',NULL,'kolby_delos@motorph.com',NULL,NULL,2,NULL,1),(10023,'Santos','Vella',NULL,'1983-12-31','955-879-269',NULL,'vella_santos@motorph.com',NULL,NULL,2,NULL,1),(10024,'Del Rosario','Tomas',NULL,'1978-12-18','882-550-989',NULL,'tomas_del@motorph.com',NULL,NULL,2,NULL,1),(10025,'Tolentino','Jacklyn',NULL,'1984-05-19','675-757-366',NULL,'jacklyn_tolentino@motorph.com',NULL,NULL,2,NULL,1),(10026,'Gutierrez','Percival',NULL,'1970-12-18','512-899-876',NULL,'percival_gutierrez@motorph.com',NULL,NULL,2,NULL,1),(10027,'Manalaysay','Garfield',NULL,'1986-08-28','948-628-136',NULL,'garfield_manalaysay@motorph.com',NULL,NULL,2,NULL,1),(10028,'Villegas','Lizeth',NULL,'1981-12-12','332-372-215',NULL,'lizeth_villegas@motorph.com',NULL,NULL,2,NULL,1),(10029,'Ramos','Carol',NULL,'1978-08-20','250-700-389',NULL,'carol_ramos@motorph.com',NULL,NULL,2,NULL,1),(10030,'Maceda','Emelia',NULL,'1973-04-14','973-358-041',NULL,'emelia_maceda@motorph.com',NULL,NULL,2,NULL,1),(10031,'Aguilar','Delia',NULL,'1989-01-27','529-705-439',NULL,'delia_aguilar@motorph.com',NULL,NULL,2,NULL,1),(10032,'Castro','John Rafael',NULL,'1992-02-09','332-424-955',NULL,'john_castro@motorph.com',NULL,NULL,1,NULL,1),(10033,'Martinez','Carlos Ian',NULL,'1990-11-16','078-854-208',NULL,'carlos_martinez@motorph.com',NULL,NULL,1,NULL,1),(10034,'Santos','Beatriz',NULL,'1990-08-07','526-639-511',NULL,'beatriz_santos@motorph.com',NULL,NULL,1,NULL,1);
+INSERT INTO `employee_profile` VALUES (10001,'Garcia','Manuel III',1,'1983-10-11','789-654-122',NULL,'manuel_garcia@motorph.com',NULL,NULL,1,NULL,1),(10002,'Lim, Antonio','Antonio',2,'1988-06-19','171-867-411',NULL,'antonio_lim@motorph.com',NULL,NULL,1,NULL,1),(10003,'Aquino','Bianca Sofia',3,'1989-08-04','966-889-370',NULL,'bianca_aquino@motorph.com',NULL,NULL,1,NULL,1),(10004,'Reyes','Isabella',4,'1994-06-16','786-868-477',NULL,'isabella_reyes@motorph.com',NULL,NULL,1,NULL,1),(10005,'Hernandez, Eduard','Eduard',5,'1989-09-23','088-861-012',NULL,'eduard_hernandez@motorph.com',NULL,NULL,1,NULL,1),(10006,'Villanueva','Andrea Mae',6,'1988-02-14','918-621-603',NULL,'andrea_villanueva@motorph.com',NULL,NULL,1,NULL,1),(10007,'San Jose','Brad',7,'1996-03-15','797-009-261',NULL,'brad_san@motorph.com',NULL,NULL,1,NULL,1),(10008,'Romualdez','Alice',8,'1992-05-14','983-606-799',NULL,'alice_romualdez@motorph.com',NULL,NULL,1,NULL,1),(10009,'Atienza','Rosie',9,'1948-09-24','266-036-427',NULL,'rosie_atienza@motorph.com',NULL,NULL,1,NULL,1),(10010,'Alvaro','Roderick',10,'1988-03-30','053-381-386',NULL,'roderick_alvaro@motorph.com',NULL,NULL,1,NULL,1),(10011,'Salcedo','Anthony',11,'1993-09-14','070-766-300',NULL,'anthony_salcedo@motorph.com',NULL,NULL,1,NULL,1),(10012,'Lopez','Josie',12,'1987-01-14','478-355-427',NULL,'josie_lopez@motorph.com',NULL,NULL,1,NULL,1),(10013,'Farala','Martha',13,'1942-01-11','329-034-366',NULL,'martha_farala@motorph.com',NULL,NULL,1,NULL,1),(10014,'Martinez','Leila',14,'1970-07-11','877-110-749',NULL,'leila_martinez@motorph.com',NULL,NULL,1,NULL,1),(10015,'Romualdez','Fredrick',15,'1985-03-10','023-079-009',NULL,'fredrick_romualdez@motorph.com',NULL,NULL,1,NULL,1),(10016,'Mata','Christian',16,'1987-10-21','783-776-744',NULL,'christian_mata@motorph.com',NULL,NULL,1,NULL,1),(10017,'De Leon','Selena',17,'1975-02-20','975-432-139',NULL,'selena_de@motorph.com',NULL,NULL,1,NULL,1),(10018,'San Jose','Allison',18,'1986-06-24','179-075-129',NULL,'allison_san@motorph.com',NULL,NULL,1,NULL,1),(10019,'Rosario','Cydney',19,'1996-10-06','868-819-912',NULL,'cydney_rosario@motorph.com',NULL,NULL,1,NULL,1),(10020,'Bautista','Mark',20,'1991-02-12','683-725-348',NULL,'mark_bautista@motorph.com',NULL,NULL,1,NULL,1),(10021,'Lazaro','Darlene',21,'1985-11-25','740-721-558',NULL,'darlene_lazaro@motorph.com',NULL,NULL,2,NULL,1),(10022,'Delos Santos','Kolby',22,'1980-02-26','739-443-033',NULL,'kolby_delos@motorph.com',NULL,NULL,2,NULL,1),(10023,'Santos','Vella',23,'1983-12-31','955-879-269',NULL,'vella_santos@motorph.com',NULL,NULL,2,NULL,1),(10024,'Del Rosario','Tomas',24,'1978-12-18','882-550-989',NULL,'tomas_del@motorph.com',NULL,NULL,2,NULL,1),(10025,'Tolentino','Jacklyn',25,'1984-05-19','675-757-366',NULL,'jacklyn_tolentino@motorph.com',NULL,NULL,2,NULL,1),(10026,'Gutierrez','Percival',26,'1970-12-18','512-899-876',NULL,'percival_gutierrez@motorph.com',NULL,NULL,2,NULL,1),(10027,'Manalaysay','Garfield',27,'1986-08-28','948-628-136',NULL,'garfield_manalaysay@motorph.com',NULL,NULL,2,NULL,1),(10028,'Villegas','Lizeth',28,'1981-12-12','332-372-215',NULL,'lizeth_villegas@motorph.com',NULL,NULL,2,NULL,1),(10029,'Ramos','Carol',29,'1978-08-20','250-700-389',NULL,'carol_ramos@motorph.com',NULL,NULL,2,NULL,1),(10030,'Maceda','Emelia',30,'1973-04-14','973-358-041',NULL,'emelia_maceda@motorph.com',NULL,NULL,2,NULL,1),(10031,'Aguilar','Delia',31,'1989-01-27','529-705-439',NULL,'delia_aguilar@motorph.com',NULL,NULL,2,NULL,1),(10032,'Castro','John Rafael',32,'1992-02-09','332-424-955',NULL,'john_castro@motorph.com',NULL,NULL,1,NULL,1),(10033,'Martinez','Carlos Ian',33,'1990-11-16','078-854-208',NULL,'carlos_martinez@motorph.com',NULL,NULL,1,NULL,1),(10034,'Santos','Beatriz',34,'1990-08-07','526-639-511',NULL,'beatriz_santos@motorph.com',NULL,NULL,1,NULL,1);
 /*!40000 ALTER TABLE `employee_profile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `government_ids`
+--
+
+DROP TABLE IF EXISTS `government_ids`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `government_ids` (
+  `government_id` int NOT NULL AUTO_INCREMENT,
+  `sss_no` varchar(50) DEFAULT NULL,
+  `philhealth_no` varchar(50) DEFAULT NULL,
+  `pagibig_no` varchar(50) DEFAULT NULL,
+  `tin_no` varchar(50) DEFAULT NULL,
+  `employee_id` int DEFAULT NULL,
+  PRIMARY KEY (`government_id`),
+  KEY `FK_Government_IDs_EmployeeProfile` (`employee_id`),
+  CONSTRAINT `FK_Government_IDs_EmployeeProfile` FOREIGN KEY (`employee_id`) REFERENCES `employee_profile` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `government_ids`
+--
+
+LOCK TABLES `government_ids` WRITE;
+/*!40000 ALTER TABLE `government_ids` DISABLE KEYS */;
+INSERT INTO `government_ids` VALUES (1,'44-4506057-3','820-126-853-951','456-852-169-36','442-605-657-000',10001),(2,'52-2061274-9','331-735-646-338','663-904-995-411','683-102-776-000',10002),(3,'30-8870406-2','177-451-189-665','171-519-773-969','971-711-280-000',10003),(4,'40-2511815-0','341-911-411-254','416-946-776-041','876-809-437-000',10004),(5,'50-5577638-1','957-436-191-812','952-347-222-457','031-702-374-000',10005),(6,'49-1632020-8','382-189-453-145','441-093-369-646','317-674-022-000',10006),(7,'40-2400714-1','239-192-926-939','210-850-209-964','672-474-690-000',10007),(8,'55-4476527-2','545-652-640-232','211-385-556-888','888-572-294-000',10008),(9,'41-0644692-3','708-988-234-853','260-107-732-354','604-997-793-000',10009),(10,'64-7605054-4','578-114-853-194','799-254-095-212','525-420-419-000',10010),(11,'26-9647608-3','126-445-315-651','218-002-473-454','210-805-911-000',10011),(12,'44-8563448-3','431-709-011-012','113-071-293-354','218-489-737-000',10012),(13,'45-5656375-0','233-693-897-247','631-130-283-546','210-835-851-000',10013),(14,'27-2090996-4','515-741-057-496','101-205-445-886','275-792-513-000',10014),(15,'26-8768374-1','308-366-860-059','223-057-707-853','598-065-761-000',10015),(16,'49-2959312-6','824-187-961-962','631-052-853-464','103-100-522-000',10016),(17,'27-2090208-8','587-272-469-938','719-007-608-464','482-259-498-000',10017),(18,'45-3251383-0','745-148-459-521','114-901-859-343','121-203-336-000',10018),(19,'49-1629900-2','579-253-435-499','265-104-358-643','122-244-511-000',10019),(20,'49-1647342-5','399-665-157-135','260-054-585-575','273-970-941-000',10020),(21,'45-5617168-2','606-386-917-510','104-907-708-845','354-650-951-000',10021),(22,'52-0109570-6','357-451-271-274','113-017-988-667','187-500-345-000',10022),(23,'52-9883524-3','548-670-482-885','360-028-104-576','101-558-994-000',10023),(24,'45-5866331-6','953-901-539-995','913-108-649-964','560-735-732-000',10024),(25,'47-1692793-0','753-800-654-114','210-546-661-243','841-177-857-000',10025),(26,'40-9504657-8','797-639-382-265','210-897-095-686','502-995-671-000',10026),(27,'45-3298166-4','810-909-286-264','211-274-476-563','336-676-445-000',10027),(28,'40-2400719-4','934-389-652-994','122-238-077-997','210-395-397-000',10028),(29,'60-1152206-4','351-830-469-744','212-141-893-454','395-032-717-000',10029),(30,'54-1331005-0','465-087-894-112','515-012-579-765','215-973-013-000',10030),(31,'52-1859253-1','136-451-303-068','110-018-813-465','599-312-588-000',10031),(32,'26-7145133-4','601-644-902-402','697-764-069-311','404-768-309-000',10032),(33,'11-5062972-7','380-685-387-212','993-372-963-726','256-436-296-000',10033),(34,'20-2987501-5','918-460-050-077','874-042-259-378','911-529-713-000',10034);
+/*!40000 ALTER TABLE `government_ids` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -129,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-17  3:58:04
+-- Dump completed on 2026-05-17  4:46:46
