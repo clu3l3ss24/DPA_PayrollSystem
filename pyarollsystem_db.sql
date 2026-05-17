@@ -151,6 +151,38 @@ INSERT INTO `employee_info` VALUES (10001,'Garcia','Manuel III','789-654-122','R
 UNLOCK TABLES;
 
 --
+-- Table structure for table `employee_logins`
+--
+
+DROP TABLE IF EXISTS `employee_logins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `employee_logins` (
+  `EmpNum` int DEFAULT NULL,
+  `LastName` text,
+  `FirstName` text,
+  `Position` text,
+  `Supervisor` text,
+  `Username` text,
+  `Password` text,
+  `Security Question` text,
+  `Answer` text,
+  `Access` text,
+  `Email` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employee_logins`
+--
+
+LOCK TABLES `employee_logins` WRITE;
+/*!40000 ALTER TABLE `employee_logins` DISABLE KEYS */;
+INSERT INTO `employee_logins` VALUES (10001,'Garcia','Manuel III','Chief Executive Officer','N/A','mgarcia','Burger123','What is your favorite food?','Pizza','ADMIN','Abcdefg001@motorph.com'),(10002,'Lim',' Antonio','Chief Operating Officer','Garcia  Manuel III','alim','Pizza123','What is your favorite food?','Pizza','ADMIN','Abcdefg001@motorph.com'),(10003,'Aquino','Bianca Sofia','Chief Finance Officer','Garcia  Manuel III','baquino','Pizza123','What is your favorite food?','Pizza','FINANCE','Abcdefg001@motorph.com'),(10004,'Reyes','Isabella','Chief Marketing Officer','Garcia  Manuel III','ireyes','Pizza123','What is your favorite food?','Pizza','ADMIN','Abcdefg001@motorph.com'),(10005,'Hernandez',' Eduard','IT Operations and Systems','Lim  Antonio','ehernandez','Pizza123','What is your favorite food?','Pizza','IT','Abcdefg001@motorph.com'),(10006,'Villanueva','Andrea Mae','HR Manager','Lim  Antonio','avillanueva','Pizza123','What is your favorite food?','Pizza','HR','Abcdefg001@motorph.com'),(10007,'San Jose','Brad','HR Team Leader','Villanueva  Andrea Mae','bsanjose','Pizza123','What is your favorite food?','Pizza','HR','Abcdefg001@motorph.com'),(10008,'Romualdez','Alice','HR Rank and File','San  Jose Brad','aromualdez','Pizza123','What is your favorite food?','Pizza','HR','Abcdefg001@motorph.com'),(10009,'Atienza','Rosie','HR Rank and File','San  Jose Brad','ratienza','Pizza123','What is your favorite food?','Pizza','HR','Abcdefg001@motorph.com'),(10010,'Alvaro','Roderick','Accounting Head','Aquino  Bianca Sofia','ralvaro','Pizza123','What is your favorite food?','Pizza','FINANCE','Abcdefg001@motorph.com'),(10011,'Salcedo','Anthony','Payroll Manager','Alvaro  Roderick','asalcedo','Pizza123','What is your favorite food?','Pizza','FINANCE','Abcdefg001@motorph.com'),(10012,'Lopez','Josie','Payroll Team Leader','Salcedo  Anthony','jlopez','Pizza123','What is your favorite food?','Pizza','FINANCE','Abcdefg001@motorph.com'),(10013,'Farala','Martha','Payroll Rank and File','Salcedo  Anthony','mfarala','Pizza123','What is your favorite food?','Pizza','FINANCE','Abcdefg001@motorph.com'),(10014,'Martinez','Leila','Payroll Rank and File','Salcedo  Anthony','lmartinez','Pizza123','What is your favorite food?','Pizza','FINANCE','Abcdefg001@motorph.com'),(10015,'Romualdez','Fredrick','Account Manager','Lim  Antonio','fromualdez','Pizza123','What is your favorite food?','Pizza','ADMIN','Abcdefg001@motorph.com'),(10016,'Mata','Christian','Account Team Leader','Romualdez  Fredrick','cmata','Pizza123','What is your favorite food?','Pizza','ADMIN','Abcdefg001@motorph.com'),(10017,'De Leon','Selena','Account Team Leader','Romualdez  Fredrick','ldeleon','Pizza123','What is your favorite food?','Pizza','ADMIN','Abcdefg001@motorph.com'),(10018,'San Jose','Allison','Account Rank and File','Mata  Christian','asanjose','Pizza123','What is your favorite food?','Pizza','REGULAR','Abcdefg001@motorph.com'),(10019,'Rosario','Cydney','Account Rank and File','Mata  Christian','crosario','Pizza123','What is your favorite food?','Pizza','REGULAR','Abcdefg001@motorph.com'),(10020,'Bautista','Mark','Account Rank and File','Mata  Christian','mbautista','Pizza123','What is your favorite food?','Pizza','REGULAR','Abcdefg001@motorph.com'),(10021,'Lazaro','Darlene','Account Rank and File','Mata  Christian','dlazaro','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10022,'Delos Santos','Kolby','Account Rank and File','Mata  Christian','sdelos','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10023,'Santos','Vella','Account Rank and File','Mata  Christian','vsantos','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10024,'Del Rosario','Tomas','Account Rank and File','Mata  Christian','rdel','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10025,'Tolentino','Jacklyn','Account Rank and File','De Leon  Selena','jtolentino','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10026,'Gutierrez','Percival','Account Rank and File','De Leon  Selena','pgutierrez','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10027,'Manalaysay','Garfield','Account Rank and File','De Leon  Selena','gmanalaysay','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10028,'Villegas','Lizeth','Account Rank and File','De Leon  Selena','lvillegas','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10029,'Ramos','Carol','Account Rank and File','De Leon  Selena','cramos','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10030,'Maceda','Emelia','Account Rank and File','De Leon  Selena','emaceda','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10031,'Aguilar','Delia','Account Rank and File','De Leon  Selena','daguilar','Pizza123','What is your favorite food?','Pizza','PROBATIONARY','Abcdefg001@motorph.com'),(10032,'Castro','John Rafael','Sales & Marketing','Reyes  Isabella','jcastro','Pizza123','What is your favorite food?','Pizza','REGULAR','Abcdefg001@motorph.com'),(10033,'Martinez','Carlos Ian','Supply Chain and Logistics','Reyes  Isabella','cmartinez','Pizza123','What is your favorite food?','Pizza','ADMIN','Abcdefg001@motorph.com'),(10034,'Santos','Beatriz','Customer Service and Relations','Reyes  Isabella','bsantos','Pizza123','What is your favorite food?','Pizza','REGULAR','Abcdefg001@motorph.com');
+/*!40000 ALTER TABLE `employee_logins` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `employee_profile`
 --
 
@@ -271,6 +303,39 @@ LOCK TABLES `status` WRITE;
 INSERT INTO `status` VALUES (1,'Regular'),(2,'Probationary');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `user_account`
+--
+
+DROP TABLE IF EXISTS `user_account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_account` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `employee_id` int NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `last_modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `UQ_User_Account_Username` (`username`),
+  UNIQUE KEY `UQ_User_Account_Email` (`email`),
+  KEY `FK_User_Account_EmployeeProfile` (`employee_id`),
+  CONSTRAINT `FK_User_Account_EmployeeProfile` FOREIGN KEY (`employee_id`) REFERENCES `employee_profile` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_account`
+--
+
+LOCK TABLES `user_account` WRITE;
+/*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
+INSERT INTO `user_account` VALUES (1,10001,'mgarcia','d66ee8adab28fc9e0df1c7d6d80a1fe3cfd52736792ed1cd8ef9a17987b9ed7e','manuel_garcia@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(2,10002,'alim','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','antonio_lim@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(3,10003,'baquino','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','bianca_aquino@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(4,10004,'ireyes','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','isabella_reyes@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(5,10005,'ehernandez','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','eduard_hernandez@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(6,10006,'avillanueva','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','andrea_villanueva@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(7,10007,'bsanjose','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','brad_san@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(8,10008,'aromualdez','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','alice_romualdez@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(9,10009,'ratienza','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','rosie_atienza@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(10,10010,'ralvaro','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','roderick_alvaro@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(11,10011,'asalcedo','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','anthony_salcedo@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(12,10012,'jlopez','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','josie_lopez@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(13,10013,'mfarala','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','martha_farala@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(14,10014,'lmartinez','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','leila_martinez@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(15,10015,'fromualdez','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','fredrick_romualdez@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(16,10016,'cmata','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','christian_mata@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(17,10017,'ldeleon','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','selena_de@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(18,10018,'asanjose','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','allison_san@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(19,10019,'crosario','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','cydney_rosario@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(20,10020,'mbautista','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','mark_bautista@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(21,10021,'dlazaro','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','darlene_lazaro@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(22,10022,'sdelos','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','kolby_delos@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(23,10023,'vsantos','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','vella_santos@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(24,10024,'rdel','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','tomas_del@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(25,10025,'jtolentino','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','jacklyn_tolentino@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(26,10026,'pgutierrez','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','percival_gutierrez@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(27,10027,'gmanalaysay','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','garfield_manalaysay@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(28,10028,'lvillegas','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','lizeth_villegas@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(29,10029,'cramos','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','carol_ramos@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(30,10030,'emaceda','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','emelia_maceda@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(31,10031,'daguilar','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','delia_aguilar@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(32,10032,'jcastro','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','john_castro@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(33,10033,'cmartinez','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','carlos_martinez@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25'),(34,10034,'bsantos','858a44e789c923fe5d2594f8996b621ab73e3293d960a7fc0e98194eb8b60499','beatriz_santos@motorph.com','2026-05-17 21:58:46','2026-05-17 22:00:25');
+/*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -281,4 +346,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-17 21:31:09
+-- Dump completed on 2026-05-17 22:01:20
