@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.46, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: payrollsystem_db
+-- Host: localhost    Database: payrolldbnath
 -- ------------------------------------------------------
--- Server version	8.0.37
+-- Server version	8.0.46
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -108,35 +108,6 @@ INSERT INTO `attendance_record` VALUES (10001,'Garcia','Manuel III','2024-06-03'
 UNLOCK TABLES;
 
 --
--- Table structure for table `audit_log`
---
-
-DROP TABLE IF EXISTS `audit_log`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `audit_log` (
-  `log_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `action` varchar(100) DEFAULT NULL,
-  `entity_changed` varchar(100) DEFAULT NULL,
-  `entity_id` int DEFAULT NULL,
-  `timestamp` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`log_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `audit_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `audit_log`
---
-
-LOCK TABLES `audit_log` WRITE;
-/*!40000 ALTER TABLE `audit_log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `audit_log` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `benefit`
 --
 
@@ -146,9 +117,8 @@ DROP TABLE IF EXISTS `benefit`;
 CREATE TABLE `benefit` (
   `benefit_type_id` int NOT NULL AUTO_INCREMENT,
   `benefit_amt` decimal(10,2) NOT NULL,
-  `description` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`benefit_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +127,7 @@ CREATE TABLE `benefit` (
 
 LOCK TABLES `benefit` WRITE;
 /*!40000 ALTER TABLE `benefit` DISABLE KEYS */;
-INSERT INTO `benefit` VALUES (1,0.00,'Rice Subsidy'),(2,0.00,'Phone Allowance'),(3,0.00,'Clothing Allowance');
+INSERT INTO `benefit` VALUES (1,1500.00),(2,2000.00),(3,1000.00),(4,800.00),(5,500.00),(8,1500.00),(9,2000.00),(10,1000.00),(11,800.00),(12,500.00);
 /*!40000 ALTER TABLE `benefit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +142,7 @@ CREATE TABLE `deduction` (
   `deduction_id` int NOT NULL AUTO_INCREMENT,
   `deduction_amount` decimal(10,2) NOT NULL,
   PRIMARY KEY (`deduction_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,6 +151,7 @@ CREATE TABLE `deduction` (
 
 LOCK TABLES `deduction` WRITE;
 /*!40000 ALTER TABLE `deduction` DISABLE KEYS */;
+INSERT INTO `deduction` VALUES (1,1125.00),(2,1013.00),(3,1080.00),(4,1058.00),(8,1125.00),(9,1013.00),(10,1080.00),(11,1058.00);
 /*!40000 ALTER TABLE `deduction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,7 +189,7 @@ CREATE TABLE `department` (
   `department_id` int NOT NULL AUTO_INCREMENT,
   `department_name` varchar(50) NOT NULL,
   PRIMARY KEY (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +198,6 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES (1,'Human Resources'),(2,'Finance'),(3,'Information Technology'),(4,'Payroll'),(5,'Marketing'),(6,'Operations'),(7,'Operations');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -427,34 +397,6 @@ LOCK TABLES `leave_type` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `overtime`
---
-
-DROP TABLE IF EXISTS `overtime`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `overtime` (
-  `ot_id` int NOT NULL AUTO_INCREMENT,
-  `attendance_id` int DEFAULT NULL,
-  `ot_hours` int DEFAULT NULL,
-  `multiplier` decimal(5,2) DEFAULT NULL,
-  `approved_by` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ot_id`),
-  KEY `attendance_id` (`attendance_id`),
-  CONSTRAINT `overtime_ibfk_1` FOREIGN KEY (`attendance_id`) REFERENCES `attendance` (`attendance_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `overtime`
---
-
-LOCK TABLES `overtime` WRITE;
-/*!40000 ALTER TABLE `overtime` DISABLE KEYS */;
-/*!40000 ALTER TABLE `overtime` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `pay_period`
 --
 
@@ -496,7 +438,7 @@ CREATE TABLE `payroll` (
   `total_benefits` decimal(10,2) NOT NULL,
   `payroll_date` date NOT NULL,
   PRIMARY KEY (`payroll_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -505,6 +447,7 @@ CREATE TABLE `payroll` (
 
 LOCK TABLES `payroll` WRITE;
 /*!40000 ALTER TABLE `payroll` DISABLE KEYS */;
+INSERT INTO `payroll` VALUES (1,10001,1,49500.00,48375.00,1125.00,1125.00,4500.00,'2026-05-18'),(2,10002,1,34500.00,33375.00,1125.00,1125.00,4500.00,'2026-05-18'),(3,10003,1,34500.00,33375.00,1125.00,1125.00,4500.00,'2026-05-18'),(4,10004,1,34500.00,33375.00,1125.00,1125.00,4500.00,'2026-05-18'),(5,10005,1,29835.00,28710.00,1125.00,1125.00,3500.00,'2026-05-18'),(6,10006,1,29835.00,28710.00,1125.00,1125.00,3500.00,'2026-05-18'),(7,10007,1,24588.00,23463.00,1125.00,1125.00,3100.00,'2026-05-18'),(8,10008,1,13750.00,12737.00,1013.00,1013.00,2500.00,'2026-05-18'),(9,10009,1,13750.00,12737.00,1013.00,1013.00,2500.00,'2026-05-18'),(10,10010,1,29835.00,28710.00,1125.00,1125.00,3500.00,'2026-05-18'),(11,10011,1,28913.00,27788.00,1125.00,1125.00,3500.00,'2026-05-18'),(12,10012,1,22338.00,21213.00,1125.00,1125.00,3100.00,'2026-05-18'),(13,10013,1,14500.00,13420.00,1080.00,1080.00,2500.00,'2026-05-18'),(14,10014,1,14500.00,13420.00,1080.00,1080.00,2500.00,'2026-05-18'),(15,10015,1,30250.00,29125.00,1125.00,1125.00,3500.00,'2026-05-18'),(16,10016,1,24588.00,23463.00,1125.00,1125.00,3100.00,'2026-05-18'),(17,10017,1,24025.00,22900.00,1125.00,1125.00,3100.00,'2026-05-18'),(18,10018,1,13750.00,12737.00,1013.00,1013.00,2500.00,'2026-05-18'),(19,10019,1,13750.00,12737.00,1013.00,1013.00,2500.00,'2026-05-18'),(20,10020,1,14125.00,13067.00,1058.00,1058.00,2500.00,'2026-05-18'),(21,10021,1,14125.00,13067.00,1058.00,1058.00,2500.00,'2026-05-18'),(22,10022,1,14500.00,13420.00,1080.00,1080.00,2500.00,'2026-05-18'),(23,10023,1,13750.00,12737.00,1013.00,1013.00,2500.00,'2026-05-18'),(24,10024,1,13750.00,12737.00,1013.00,1013.00,2500.00,'2026-05-18'),(25,10025,1,14500.00,13420.00,1080.00,1080.00,2500.00,'2026-05-18'),(26,10026,1,14875.00,13750.00,1125.00,1125.00,2500.00,'2026-05-18'),(27,10027,1,14875.00,13750.00,1125.00,1125.00,2500.00,'2026-05-18'),(28,10028,1,14500.00,13420.00,1080.00,1080.00,2500.00,'2026-05-18'),(29,10029,1,13750.00,12737.00,1013.00,1013.00,2500.00,'2026-05-18'),(30,10030,1,13750.00,12737.00,1013.00,1013.00,2500.00,'2026-05-18'),(31,10031,1,13750.00,12737.00,1013.00,1013.00,2500.00,'2026-05-18'),(32,10032,1,29835.00,28710.00,1125.00,1125.00,3500.00,'2026-05-18'),(33,10033,1,29835.00,28710.00,1125.00,1125.00,3500.00,'2026-05-18'),(34,10034,1,29835.00,28710.00,1125.00,1125.00,3500.00,'2026-05-18');
 /*!40000 ALTER TABLE `payroll` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -521,7 +464,7 @@ CREATE TABLE `payroll_benefit` (
   `payroll_id` int NOT NULL,
   `benefit_amount` decimal(10,2) NOT NULL,
   PRIMARY KEY (`payroll_benefit_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -530,6 +473,7 @@ CREATE TABLE `payroll_benefit` (
 
 LOCK TABLES `payroll_benefit` WRITE;
 /*!40000 ALTER TABLE `payroll_benefit` DISABLE KEYS */;
+INSERT INTO `payroll_benefit` VALUES (1,1,1,1500.00),(2,1,2,1500.00),(3,1,3,1500.00),(4,1,4,1500.00),(5,1,5,1500.00),(6,1,6,1500.00),(7,1,7,1500.00),(8,1,8,1500.00),(9,1,9,1500.00),(10,1,10,1500.00),(11,1,11,1500.00),(12,1,12,1500.00),(13,1,13,1500.00),(14,1,14,1500.00),(15,1,15,1500.00),(16,1,16,1500.00),(17,1,17,1500.00),(18,1,18,1500.00),(19,1,19,1500.00),(20,1,20,1500.00),(21,1,21,1500.00),(22,1,22,1500.00),(23,1,23,1500.00),(24,1,24,1500.00),(25,1,25,1500.00),(26,1,26,1500.00),(27,1,27,1500.00),(28,1,28,1500.00),(29,1,29,1500.00),(30,1,30,1500.00),(31,1,31,1500.00),(32,1,32,1500.00),(33,1,33,1500.00),(34,1,34,1500.00),(35,2,1,2000.00),(36,2,2,2000.00),(37,2,3,2000.00),(38,2,4,2000.00),(39,2,5,1000.00),(40,2,6,1000.00),(41,2,7,800.00),(42,2,8,500.00),(43,2,9,500.00),(44,2,10,1000.00),(45,2,11,1000.00),(46,2,12,800.00),(47,2,13,500.00),(48,2,14,500.00),(49,2,15,1000.00),(50,2,16,800.00),(51,2,17,800.00),(52,2,18,500.00),(53,2,19,500.00),(54,2,20,500.00),(55,2,21,500.00),(56,2,22,500.00),(57,2,23,500.00),(58,2,24,500.00),(59,2,25,500.00),(60,2,26,500.00),(61,2,27,500.00),(62,2,28,500.00),(63,2,29,500.00),(64,2,30,500.00),(65,2,31,500.00),(66,2,32,1000.00),(67,2,33,1000.00),(68,2,34,1000.00),(69,3,1,1000.00),(70,3,2,1000.00),(71,3,3,1000.00),(72,3,4,1000.00),(73,3,5,1000.00),(74,3,6,1000.00),(75,3,7,800.00),(76,3,8,500.00),(77,3,9,500.00),(78,3,10,1000.00),(79,3,11,1000.00),(80,3,12,800.00),(81,3,13,500.00),(82,3,14,500.00),(83,3,15,1000.00),(84,3,16,800.00),(85,3,17,800.00),(86,3,18,500.00),(87,3,19,500.00),(88,3,20,500.00),(89,3,21,500.00),(90,3,22,500.00),(91,3,23,500.00),(92,3,24,500.00),(93,3,25,500.00),(94,3,26,500.00),(95,3,27,500.00),(96,3,28,500.00),(97,3,29,500.00),(98,3,30,500.00),(99,3,31,500.00),(100,3,32,1000.00),(101,3,33,1000.00),(102,3,34,1000.00),(128,1,1,1500.00),(129,1,2,1500.00),(130,1,3,1500.00),(131,1,4,1500.00),(132,1,5,1500.00),(133,1,6,1500.00),(134,1,7,1500.00),(135,1,8,1500.00),(136,1,9,1500.00),(137,1,10,1500.00),(138,1,11,1500.00),(139,1,12,1500.00),(140,1,13,1500.00),(141,1,14,1500.00),(142,1,15,1500.00),(143,1,16,1500.00),(144,1,17,1500.00),(145,1,18,1500.00),(146,1,19,1500.00),(147,1,20,1500.00),(148,1,21,1500.00),(149,1,22,1500.00),(150,1,23,1500.00),(151,1,24,1500.00),(152,1,25,1500.00),(153,1,26,1500.00),(154,1,27,1500.00),(155,1,28,1500.00),(156,1,29,1500.00),(157,1,30,1500.00),(158,1,31,1500.00),(159,1,32,1500.00),(160,1,33,1500.00),(161,1,34,1500.00),(162,2,1,2000.00),(163,2,2,2000.00),(164,2,3,2000.00),(165,2,4,2000.00),(166,2,5,1000.00),(167,2,6,1000.00),(168,2,7,800.00),(169,2,8,500.00),(170,2,9,500.00),(171,2,10,1000.00),(172,2,11,1000.00),(173,2,12,800.00),(174,2,13,500.00),(175,2,14,500.00),(176,2,15,1000.00),(177,2,16,800.00),(178,2,17,800.00),(179,2,18,500.00),(180,2,19,500.00),(181,2,20,500.00),(182,2,21,500.00),(183,2,22,500.00),(184,2,23,500.00),(185,2,24,500.00),(186,2,25,500.00),(187,2,26,500.00),(188,2,27,500.00),(189,2,28,500.00),(190,2,29,500.00),(191,2,30,500.00),(192,2,31,500.00),(193,2,32,1000.00),(194,2,33,1000.00),(195,2,34,1000.00),(196,3,1,1000.00),(197,3,2,1000.00),(198,3,3,1000.00),(199,3,4,1000.00),(200,3,5,1000.00),(201,3,6,1000.00),(202,3,7,800.00),(203,3,8,500.00),(204,3,9,500.00),(205,3,10,1000.00),(206,3,11,1000.00),(207,3,12,800.00),(208,3,13,500.00),(209,3,14,500.00),(210,3,15,1000.00),(211,3,16,800.00),(212,3,17,800.00),(213,3,18,500.00),(214,3,19,500.00),(215,3,20,500.00),(216,3,21,500.00),(217,3,22,500.00),(218,3,23,500.00),(219,3,24,500.00),(220,3,25,500.00),(221,3,26,500.00),(222,3,27,500.00),(223,3,28,500.00),(224,3,29,500.00),(225,3,30,500.00),(226,3,31,500.00),(227,3,32,1000.00),(228,3,33,1000.00),(229,3,34,1000.00);
 /*!40000 ALTER TABLE `payroll_benefit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -545,7 +489,7 @@ CREATE TABLE `payroll_deduction` (
   `payroll_id` int NOT NULL,
   `deduction_id` int NOT NULL,
   PRIMARY KEY (`payroll_deduction_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -554,6 +498,7 @@ CREATE TABLE `payroll_deduction` (
 
 LOCK TABLES `payroll_deduction` WRITE;
 /*!40000 ALTER TABLE `payroll_deduction` DISABLE KEYS */;
+INSERT INTO `payroll_deduction` VALUES (1,1,8),(2,1,1),(3,2,8),(4,2,1),(5,3,8),(6,3,1),(7,4,8),(8,4,1),(9,5,8),(10,5,1),(11,6,8),(12,6,1),(13,7,8),(14,7,1),(15,8,9),(16,8,2),(17,9,9),(18,9,2),(19,10,8),(20,10,1),(21,11,8),(22,11,1),(23,12,8),(24,12,1),(25,13,10),(26,13,3),(27,14,10),(28,14,3),(29,15,8),(30,15,1),(31,16,8),(32,16,1),(33,17,8),(34,17,1),(35,18,9),(36,18,2),(37,19,9),(38,19,2),(39,20,11),(40,20,4),(41,21,11),(42,21,4),(43,22,10),(44,22,3),(45,23,9),(46,23,2),(47,24,9),(48,24,2),(49,25,10),(50,25,3),(51,26,8),(52,26,1),(53,27,8),(54,27,1),(55,28,10),(56,28,3),(57,29,9),(58,29,2),(59,30,9),(60,30,2),(61,31,9),(62,31,2),(63,32,8),(64,32,1),(65,33,8),(66,33,1),(67,34,8),(68,34,1);
 /*!40000 ALTER TABLE `payroll_deduction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -573,7 +518,7 @@ CREATE TABLE `permission` (
   `description` text,
   PRIMARY KEY (`permission_id`),
   UNIQUE KEY `permission_name` (`permission_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -582,6 +527,7 @@ CREATE TABLE `permission` (
 
 LOCK TABLES `permission` WRITE;
 /*!40000 ALTER TABLE `permission` DISABLE KEYS */;
+INSERT INTO `permission` VALUES (1,'view_own_payroll','Payroll','READ','OWN','Allows an employee to view their own payslip files.'),(2,'view_dept_payroll','Payroll','READ','DEPARTMENT','Allows team leaders or managers to view their direct reports payroll summaries.'),(3,'manage_all_payroll','Payroll','UPDATE','ALL','Allows complete payroll processing, editing rates, and updates across the entire company.'),(4,'create_employee_records','Employee_Management','CREATE','ALL','Allows HR or system admins to onboard and input new employee details into the platform.'),(5,'view_all_reports','Reports','READ','ALL','Grants executive views to system-wide company financial and employee reports.');
 /*!40000 ALTER TABLE `permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -597,7 +543,7 @@ CREATE TABLE `position` (
   `position_title` varchar(50) NOT NULL,
   `department_id` int NOT NULL,
   PRIMARY KEY (`position_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -606,37 +552,7 @@ CREATE TABLE `position` (
 
 LOCK TABLES `position` WRITE;
 /*!40000 ALTER TABLE `position` DISABLE KEYS */;
-INSERT INTO `position` VALUES (1,'Chief Executive Officer',6),(2,'Chief Operating Officer',6),(3,'Supply Chain and Logistics',6),(4,'Customer Service and Relations',6),(5,'Chief Finance Officer',2),(6,'Accounting Head',2),(7,'Account Manager',2),(8,'Account Team Leader',2),(9,'Account Rank and File',2),(10,'Chief Marketing Officer',5),(11,'Sales & Marketing',5),(12,'IT Operations and Systems',3),(13,'HR Manager',1),(14,'HR Team Leader',1),(15,'HR Rank and File',1),(16,'Payroll Manager',4),(17,'Payroll Team Leader',4),(18,'Payroll Rank and File',4);
 /*!40000 ALTER TABLE `position` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `position_allowances`
---
-
-DROP TABLE IF EXISTS `position_allowances`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `position_allowances` (
-  `position_allowance_id` int NOT NULL AUTO_INCREMENT,
-  `position_id` int NOT NULL,
-  `rice_subsidy` decimal(10,2) DEFAULT '0.00',
-  `phone_allowance` decimal(10,2) DEFAULT '0.00',
-  `clothing_allowance` decimal(10,2) DEFAULT '0.00',
-  `total_allowance` decimal(10,2) DEFAULT '0.00',
-  PRIMARY KEY (`position_allowance_id`),
-  KEY `fk_position_allowances_position` (`position_id`),
-  CONSTRAINT `fk_position_allowances_position` FOREIGN KEY (`position_id`) REFERENCES `position` (`position_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `position_allowances`
---
-
-LOCK TABLES `position_allowances` WRITE;
-/*!40000 ALTER TABLE `position_allowances` DISABLE KEYS */;
-/*!40000 ALTER TABLE `position_allowances` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -649,12 +565,9 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `role_id` int NOT NULL AUTO_INCREMENT,
   `role_name` varchar(50) NOT NULL,
-  `description` text,
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `last_modified` datetime DEFAULT NULL,
   PRIMARY KEY (`role_id`),
   UNIQUE KEY `role_name` (`role_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -663,6 +576,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'ADMIN'),(2,'FINANCE'),(4,'HR'),(3,'IT'),(6,'PROBATIONARY'),(5,'REGULAR');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -674,15 +588,11 @@ DROP TABLE IF EXISTS `role_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role_permission` (
-  `role_permission_id` int NOT NULL AUTO_INCREMENT,
-  `role_id` int DEFAULT NULL,
-  `permission_id` int DEFAULT NULL,
-  PRIMARY KEY (`role_permission_id`),
-  KEY `role_id` (`role_id`),
-  KEY `permission_id` (`permission_id`),
-  CONSTRAINT `role_permission_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
-  CONSTRAINT `role_permission_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permission` (`permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `permission_id` int NOT NULL AUTO_INCREMENT,
+  `permission_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`permission_id`),
+  UNIQUE KEY `permission_name` (`permission_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -691,6 +601,7 @@ CREATE TABLE `role_permission` (
 
 LOCK TABLES `role_permission` WRITE;
 /*!40000 ALTER TABLE `role_permission` DISABLE KEYS */;
+INSERT INTO `role_permission` VALUES (2,'edit_payroll'),(3,'manage_users'),(1,'view_payroll'),(4,'view_reports');
 /*!40000 ALTER TABLE `role_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -725,31 +636,6 @@ INSERT INTO `salary_details` VALUES (1,10001,90000.00,535.71,NULL,NULL),(2,10002
 UNLOCK TABLES;
 
 --
--- Table structure for table `shift`
---
-
-DROP TABLE IF EXISTS `shift`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `shift` (
-  `shift_id` int NOT NULL AUTO_INCREMENT,
-  `shift_name` varchar(50) DEFAULT NULL,
-  `start_time` time DEFAULT NULL,
-  `end_time` time DEFAULT NULL,
-  PRIMARY KEY (`shift_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `shift`
---
-
-LOCK TABLES `shift` WRITE;
-/*!40000 ALTER TABLE `shift` DISABLE KEYS */;
-/*!40000 ALTER TABLE `shift` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `status`
 --
 
@@ -774,38 +660,6 @@ INSERT INTO `status` VALUES (1,'Regular'),(2,'Probationary');
 UNLOCK TABLES;
 
 --
--- Table structure for table `user_account`
---
-
-DROP TABLE IF EXISTS `user_account`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_account` (
-  `user_id` int NOT NULL AUTO_INCREMENT,
-  `employee_id` int DEFAULT NULL,
-  `username` varchar(50) NOT NULL,
-  `password_hash` varchar(255) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `last_modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
-  KEY `employee_id` (`employee_id`),
-  CONSTRAINT `user_account_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_profile` (`employee_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_account`
---
-
-LOCK TABLES `user_account` WRITE;
-/*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `user_role`
 --
 
@@ -814,14 +668,10 @@ DROP TABLE IF EXISTS `user_role`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_role` (
   `user_role_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `role_id` int DEFAULT NULL,
-  PRIMARY KEY (`user_role_id`),
-  KEY `user_id` (`user_id`),
-  KEY `role_id` (`role_id`),
-  CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`user_id`),
-  CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `user_id` int NOT NULL,
+  `role_id` int NOT NULL,
+  PRIMARY KEY (`user_role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -830,6 +680,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
+INSERT INTO `user_role` VALUES (1,10001,1),(2,10002,1),(3,10003,2),(4,10004,1),(5,10005,3),(6,10006,4),(7,10007,4),(8,10008,4),(9,10009,4),(10,10010,2),(11,10011,2),(12,10012,2),(13,10013,2),(14,10014,2),(15,10015,1),(16,10016,1),(17,10017,1),(18,10018,5),(19,10019,5),(20,10020,5),(21,10021,6),(22,10022,6),(23,10023,6),(24,10024,6),(25,10025,6),(26,10026,6),(27,10027,6),(28,10028,6),(29,10029,6),(30,10030,6),(31,10031,6),(32,10032,5),(33,10033,1),(34,10034,5);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -842,4 +693,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-18 18:06:08
+-- Dump completed on 2026-05-18 20:31:23
