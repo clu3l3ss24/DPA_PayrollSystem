@@ -204,6 +204,7 @@ DROP TABLE IF EXISTS `deduction_type`;
 CREATE TABLE `deduction_type` (
   `deduction_type_id` int NOT NULL AUTO_INCREMENT,
   `deduction_name` enum('SSS','Pag-IBIG','PhilHealth','Tax','Late','Absences') DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`deduction_type_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -214,7 +215,7 @@ CREATE TABLE `deduction_type` (
 
 LOCK TABLES `deduction_type` WRITE;
 /*!40000 ALTER TABLE `deduction_type` DISABLE KEYS */;
-INSERT INTO `deduction_type` VALUES (1,'SSS'),(2,'Pag-IBIG'),(3,'PhilHealth'),(4,'Tax');
+INSERT INTO `deduction_type` VALUES (1,'SSS','Social Security System contribution deducted from employee salary.'),(2,'Pag-IBIG','Home Development Mutual Fund contribution deducted from employee salary.'),(3,'PhilHealth','PhilHealth insurance contribution deducted from employee salary.'),(4,'Tax','Government withholding tax deducted based on taxable income.');
 /*!40000 ALTER TABLE `deduction_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,6 +229,7 @@ DROP TABLE IF EXISTS `department`;
 CREATE TABLE `department` (
   `department_id` int NOT NULL AUTO_INCREMENT,
   `department_name` varchar(50) NOT NULL,
+  `description` text,
   PRIMARY KEY (`department_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -238,7 +240,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES (1,'Human Resources'),(2,'Finance'),(3,'Information Technology'),(4,'Payroll'),(5,'Marketing'),(6,'Operations');
+INSERT INTO `department` VALUES (1,'Human Resources','Handles employee records, recruitment, and HR-related concerns.'),(2,'Finance','Manages company finances, accounting, budgeting, and payroll-related financial records.'),(3,'Information Technology','Maintains IT systems, software, databases, and technical support operations.'),(4,'Payroll','Handles salary processing, deductions, benefits, and payroll computation.'),(5,'Marketing','Manages advertising, promotions, branding, and customer engagement.'),(6,'Operations','Oversees daily business operations and workflow management.');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -877,4 +879,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-27 18:10:38
+-- Dump completed on 2026-05-30 14:54:07
