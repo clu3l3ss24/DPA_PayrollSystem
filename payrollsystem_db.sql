@@ -71,7 +71,7 @@ CREATE TABLE `attendance` (
   CONSTRAINT `fk_attendance_employee` FOREIGN KEY (`employee_id`) REFERENCES `employee_profile` (`employee_id`) ON DELETE CASCADE,
   CONSTRAINT `FK_Attendance_EmployeeProfile` FOREIGN KEY (`employee_id`) REFERENCES `employee_profile` (`employee_id`),
   CONSTRAINT `fk_attendance_shift` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`shift_id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5169 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5170 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -395,8 +395,9 @@ CREATE TABLE `pay_period` (
   `payperiod_id` int NOT NULL AUTO_INCREMENT,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  PRIMARY KEY (`payperiod_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`payperiod_id`),
+  UNIQUE KEY `uq_pay_period_dates` (`start_date`,`end_date`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -405,7 +406,7 @@ CREATE TABLE `pay_period` (
 
 LOCK TABLES `pay_period` WRITE;
 /*!40000 ALTER TABLE `pay_period` DISABLE KEYS */;
-INSERT INTO `pay_period` VALUES (1,'2024-06-01','2024-06-15'),(2,'2024-06-16','2024-06-30'),(3,'2024-07-01','2024-07-15'),(4,'2024-07-16','2024-07-31'),(5,'2024-08-01','2024-08-15'),(6,'2024-08-16','2024-08-31'),(7,'2024-09-01','2024-09-15'),(8,'2024-09-16','2024-09-30'),(9,'2024-10-01','2024-10-15'),(10,'2024-10-16','2024-10-31'),(11,'2024-11-01','2024-11-15'),(12,'2024-11-16','2024-11-30'),(13,'2024-12-01','2024-12-15'),(14,'2024-12-16','2024-12-31');
+INSERT INTO `pay_period` VALUES (1,'2024-05-21','2024-06-05'),(2,'2024-06-06','2024-06-20'),(3,'2024-06-21','2024-07-05'),(4,'2024-07-06','2024-07-20'),(5,'2024-07-21','2024-08-05'),(6,'2024-08-06','2024-08-20'),(7,'2024-08-21','2024-09-05'),(8,'2024-09-06','2024-09-20'),(9,'2024-09-21','2024-10-05'),(10,'2024-10-06','2024-10-20'),(11,'2024-10-21','2024-11-05'),(12,'2024-11-06','2024-11-20'),(13,'2024-11-21','2024-12-05'),(14,'2024-12-06','2024-12-20');
 /*!40000 ALTER TABLE `pay_period` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -802,4 +803,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-06 21:13:12
+-- Dump completed on 2026-06-06 21:33:54
