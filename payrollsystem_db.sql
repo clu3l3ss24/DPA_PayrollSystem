@@ -116,28 +116,27 @@ INSERT INTO `audit_log` VALUES (1,1,'CREATE','department',1,'2026-05-18 20:24:43
 UNLOCK TABLES;
 
 --
--- Table structure for table `benefit`
+-- Table structure for table `benefit_type`
 --
 
-DROP TABLE IF EXISTS `benefit`;
+DROP TABLE IF EXISTS `benefit_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `benefit` (
+CREATE TABLE `benefit_type` (
   `benefit_type_id` int NOT NULL AUTO_INCREMENT,
-  `benefit_amt` decimal(10,2) NOT NULL,
   `description` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`benefit_type_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `benefit`
+-- Dumping data for table `benefit_type`
 --
 
-LOCK TABLES `benefit` WRITE;
-/*!40000 ALTER TABLE `benefit` DISABLE KEYS */;
-INSERT INTO `benefit` VALUES (1,0.00,'Rice Subsidy'),(2,0.00,'Phone Allowance'),(3,0.00,'Clothing Allowance');
-/*!40000 ALTER TABLE `benefit` ENABLE KEYS */;
+LOCK TABLES `benefit_type` WRITE;
+/*!40000 ALTER TABLE `benefit_type` DISABLE KEYS */;
+INSERT INTO `benefit_type` VALUES (1,'Rice Subsidy'),(2,'Phone Allowance'),(3,'Clothing Allowance');
+/*!40000 ALTER TABLE `benefit_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -435,7 +434,7 @@ CREATE TABLE `payroll` (
   KEY `fk_payroll_pay_period` (`payperiod_id`),
   CONSTRAINT `fk_payroll_employee` FOREIGN KEY (`employee_id`) REFERENCES `employee_profile` (`employee_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_payroll_pay_period` FOREIGN KEY (`payperiod_id`) REFERENCES `pay_period` (`payperiod_id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=575 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=506 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -462,8 +461,8 @@ CREATE TABLE `payroll_benefit` (
   `benefit_amount` decimal(10,2) NOT NULL,
   PRIMARY KEY (`payroll_benefit_id`),
   KEY `fk_payroll_benefit_benefit_type` (`benefit_type_id`),
-  CONSTRAINT `fk_payroll_benefit_benefit_type` FOREIGN KEY (`benefit_type_id`) REFERENCES `benefit` (`benefit_type_id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2048 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_payroll_benefit_benefit_type` FOREIGN KEY (`benefit_type_id`) REFERENCES `benefit_type` (`benefit_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1429 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -493,7 +492,7 @@ CREATE TABLE `payroll_deduction` (
   KEY `fk_payroll_deduction_master` (`deduction_id`),
   CONSTRAINT `fk_deduction_payroll` FOREIGN KEY (`payroll_id`) REFERENCES `payroll` (`payroll_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_payroll_deduction_master` FOREIGN KEY (`deduction_id`) REFERENCES `deduction` (`deduction_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2048 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1429 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -789,6 +788,10 @@ LOCK TABLES `user_role` WRITE;
 INSERT INTO `user_role` VALUES (1,1,1),(2,2,1),(3,3,3),(4,4,1),(5,5,4),(6,6,2),(7,7,2),(8,8,2),(9,9,2),(10,10,3),(11,11,3),(12,12,3),(13,13,3),(14,14,3),(15,15,1),(16,16,1),(17,17,1),(18,18,4),(19,19,4),(20,20,4),(21,21,4),(22,22,4),(23,23,4),(24,24,4),(25,25,4),(26,26,4),(27,27,4),(28,28,4),(29,29,4),(30,30,4),(31,31,4),(32,32,4),(33,33,1),(34,34,4);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'payrollsystem_db'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -799,4 +802,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-02 18:56:08
+-- Dump completed on 2026-06-06 21:13:12
