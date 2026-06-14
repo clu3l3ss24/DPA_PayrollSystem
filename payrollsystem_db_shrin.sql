@@ -694,3 +694,98 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2026-05-18 20:34:04
+
+
+-- =========================================================================
+-- SYSTEM PAYROLL SUMMARY DATABASE REPORT
+-- Automatically calculates timecard metrics, taxes, and statutory splits
+-- =========================================================================
+
+CREATE OR REPLACE VIEW payroll_summary_report AS 
+SELECT  
+    -- 1. IDENTIFICATION HEADERS
+    p.payroll_id AS 'Payroll ID',
+    e.employee_id AS 'Employee ID',
+    CONCAT(e.last_name, ', ', e.first_name) AS 'Employee Name',
+    pos.position_name AS 'Position',
+    d.department_name AS 'Department',
+    pp.start_date AS 'Period Start',
+    pp.end_date AS 'Period End',
+ 
+    -- 2. HOURLY TIMECARD TRACKING
+    sd.basic_salary AS 'Monthly Base Salary',
+    sd.hourly_rate AS 'Hourly Rate', 
+    p.total_work_hours AS 'Hours Rendered',
+    ROUND(p.total_work_hours / 8, 1) AS 'Days Worked',
+    p.overtime_hours AS 'OT Hours', 
+    
+    -- 3. REAL-TIME EARNINGS CALCULATIONS
+    ROUND(p.total_work_hours * sd.hourly_rate, 2) AS 'Basic Earned Pay',
+    ROUND(p.overtime_hours * (sd.hourly_rate * 1.25), 2) AS 'Overtime Pay', 
+    ROUND((p.total_work_hours * sd.hourly_rate) + (p.overtime_hours * (sd.hourly_rate * 1.25)), 2) AS 'Gross Income', 
+ 
+    -- 4. SEMI-MONTHLY BENEFIT DISTRIBUTION
+    ROUND(p.total_benefits / 2, 2) AS 'Cutoff Benefits', 
+ 
+    -- 5. MANDATORY GOVERNMENT DEDUCTIONS (PER CUTOFF)
+    -- SSS: Looked up from your 45-bracket table and split in half
+    ROUND(COALESCE((
+        SELECT sc.employee_share 
+        FROM sss_contribution sc 
+        WHERE sd.basic_salary >= sc.min_salary AND sd.basic_salary <= sc.max_salary
+        LIMIT 1
+    ), 1125.00) / 2, 2) AS 'SSS Cutoff Deduction', 
+    
+    -- PhilHealth: Current legal 5% premium rate shared 50/50 and split across 2 cutoffs (Total Premium / 4)
+    CASE 
+        WHEN sd.basic_salary <= 10000.00 THEN ROUND(500.00 / 4, 2)
+        WHEN sd.basic_salary >= 100000.00 THEN ROUND(5000.00 / 4, 2)
+        ELSE ROUND((sd.basic_salary * 0.05) / 4, 2)
+    END AS 'PhilHealth Cutoff Deduction', 
+    
+    -- Pag-IBIG: Standard fixed flat 100.00 per cutoff allocation
+    100.00 AS 'Pag-IBIG Cutoff Deduction', 
+    
+    -- Withholding Tax: Evaluated from true earned gross income against the 10,417.00 threshold
+    CASE 
+        WHEN ((p.total_work_hours * sd.hourly_rate) + (p.overtime_hours * (sd.hourly_rate * 1.25))) <= 10417.00 THEN 0.00
+        ELSE ROUND((((p.total_work_hours * sd.hourly_rate) + (p.overtime_hours * (sd.hourly_rate * 1.25))) - 10417.00) * 0.20, 2)
+    END AS 'Withholding Tax', 
+    
+    -- Total Combined Cutoff Deductions Summary
+    ROUND(
+        -- Tax Component
+        (CASE WHEN ((p.total_work_hours * sd.hourly_rate) + (p.overtime_hours * (sd.hourly_rate * 1.25))) <= 10417.00 THEN 0.00 
+              ELSE (((p.total_work_hours * sd.hourly_rate) + (p.overtime_hours * (sd.hourly_rate * 1.25))) - 10417.00) * 0.20 END) +
+        -- SSS Component
+        (COALESCE((SELECT sc.employee_share FROM sss_contribution sc WHERE sd.basic_salary >= sc.min_salary AND sd.basic_salary <= sc.max_salary LIMIT 1), 1125.00) / 2) +
+        -- PhilHealth Component
+        (CASE WHEN sd.basic_salary <= 10000.00 THEN 500.00 WHEN sd.basic_salary >= 100000.00 THEN 5000.00 ELSE (sd.basic_salary * 0.05) END / 4) +
+        -- Pag-IBIG Component
+        100.00, 2) AS 'Total Deductions', 
+        
+    -- 6. FINAL NET TAKE-HOME PAY RECONCILIATION
+    ROUND(
+        ((p.total_work_hours * sd.hourly_rate) + (p.overtime_hours * (sd.hourly_rate * 1.25))) + (p.total_benefits / 2) - 
+        ((CASE WHEN ((p.total_work_hours * sd.hourly_rate) + (p.overtime_hours * (sd.hourly_rate * 1.25))) <= 10417.00 THEN 0.00 ELSE (((p.total_work_hours * sd.hourly_rate) + (p.overtime_hours * (sd.hourly_rate * 1.25))) - 10417.00) * 0.20 END) +
+        (COALESCE((SELECT sc.employee_share FROM sss_contribution sc WHERE sd.basic_salary >= sc.min_salary AND sd.basic_salary <= sc.max_salary LIMIT 1), 1125.00) / 2) +
+        (CASE WHEN sd.basic_salary <= 10000.00 THEN 500.00 WHEN sd.basic_salary >= 100000.00 THEN 5000.00 ELSE (sd.basic_salary * 0.05) END / 4) + 100.00), 2) AS 'Net Take-Home Pay' 
+ 
+FROM employee_profile e 
+LEFT JOIN department d ON e.department_id = d.department_id 
+LEFT JOIN position pos ON e.position_id = pos.position_id
+LEFT JOIN salary_details sd ON e.employee_id = sd.employee_id
+LEFT JOIN payroll p ON e.employee_id = p.employee_id 
+LEFT JOIN pay_period pp ON p.payperiod_id = pp.payperiod_id;
+
+
+
+
+
+
+
+
+
+
+
+
